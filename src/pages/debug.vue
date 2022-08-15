@@ -5,7 +5,7 @@ import { genresStore } from '@/stores'
 
 definePageMeta({
   title: 'DEBUG',
-  menuPosition: 2,
+  menuPosition: process.dev ? 2 : undefined,
 })
 
 const { data, pending, error } = useFetch('/api/debug')
