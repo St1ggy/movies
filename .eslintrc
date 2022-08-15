@@ -1,0 +1,175 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:vue/essential",
+    "plugin:vue-pug-sfc/vue3-essential",
+    "plugin:@typescript-eslint/recommended",
+    "@nuxtjs/eslint-config-typescript",
+    "prettier"
+  ],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "parser": "@typescript-eslint/parser",
+    "sourceType": "module",
+    "extraFileExtensions": [
+      ".vue"
+    ]
+  },
+  "plugins": [
+    "vue",
+    "@typescript-eslint",
+    "pug",
+    "import",
+    "prettier"
+  ],
+  "rules": {
+    "prettier/prettier": "error",
+    "object-curly-newline": "off",
+    "operator-linebreak": "off",
+    "function-paren-newline": "off",
+    "no-confusing-arrow": "off",
+    "newline-per-chained-call": "off",
+    "indent": "off",
+    "implicit-arrow-linebreak": "off",
+    "no-undef": "off",
+    "no-console": "error",
+    "lines-between-class-members": [
+      "error",
+      "always",
+      {
+        "exceptAfterSingleLine": true
+      }
+    ],
+    "prefer-template": "error",
+    "arrow-body-style": [
+      "error",
+      "as-needed"
+    ],
+    "no-return-assign": "off",
+    "radix": "off",
+    "no-mixed-operators": "off",
+    "max-len": [
+      "error",
+      {
+        "code": 120,
+        "tabWidth": 2,
+        "ignoreComments": true,
+        "ignoreRegExpLiterals": true,
+        "ignoreStrings": true,
+        "ignoreTrailingComments": true
+      }
+    ],
+    "camelcase": [
+      "error",
+      {
+        "allow": [
+          "Iso639_1",
+          "Iso3166_1"
+        ]
+      }
+    ],
+    "no-shadow": "off",
+    "no-unused-vars": "off",
+    "no-use-before-define": "off",
+    "@typescript-eslint/ban-types": [
+      "warn"
+    ],
+    "@typescript-eslint/no-shadow": [
+      "error",
+      {
+        "ignoreTypeValueShadow": true
+      }
+    ],
+    "@typescript-eslint/no-var-requires": [
+      "off"
+    ],
+    "@typescript-eslint/no-empty-function": [
+      "off"
+    ],
+    "@typescript-eslint/no-use-before-define": [
+      "error"
+    ],
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "ignoreRestSiblings": true
+      }
+    ],
+    "@typescript-eslint/ban-ts-comment": [
+      "error",
+      {
+        "ts-expect-error": "allow-with-description",
+        "ts-ignore": "allow-with-description"
+      }
+    ],
+    "import/newline-after-import": "error",
+    "sort-imports": [
+      "error",
+      {
+        "ignoreDeclarationSort": true
+      }
+    ],
+    "import/order": [
+      "error",
+      {
+        "newlines-between": "always",
+        "groups": [
+          [
+            "builtin",
+            "external"
+          ],
+          [
+            "internal"
+          ],
+          [
+            "sibling",
+            "parent",
+            "index",
+            "object"
+          ],
+          [
+            "type"
+          ]
+        ],
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": false
+        }
+      }
+    ],
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "vue/attributes-order": [
+      "error"
+    ],
+    "vue/prefer-template": [
+      "error"
+    ],
+    "import/no-duplicates": [
+      "error",
+      {
+        "considerQueryString": true
+      }
+    ],
+    "object-shorthand": "error",
+    "prefer-const": "error",
+    "vue/multi-word-component-names": "off"
+  },
+  "overrides": [
+    {
+      "files": [
+        "*.vue"
+      ],
+      "rules": {
+        "@typescript-eslint/no-unused-vars": "off"
+      }
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+@mixin border {
+  @apply border-primary/25;
+
+  border-width: 1px;
+}
+
+@mixin shadow($hover: false) {
+  @if $hover {
+    @apply shadow-md shadow-primary/[0.03] transition-all;
+    @apply hover:shadow-xl hover:scale-110;
+  } @else {
+    @apply shadow-xl shadow-primary/[0.03];
+  }
+}
