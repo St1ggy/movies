@@ -1,4 +1,5 @@
 import { sample } from 'effector'
+import { deserialize } from 'tserialize'
 
 import { MovieDetails, SeriesDetails } from '@/models'
 
@@ -7,7 +8,7 @@ import * as events from './events'
 import * as stores from './stores'
 
 sample({
-  source: events.getMovieById,
+  source: events.getDetails,
   target: fetchMovieFx,
 })
 
@@ -21,9 +22,9 @@ stores.$isLoading //
   .on(fetchMovieFx.pending, () => true)
   .reset(fetchMovieFx.doneData)
 
-stores.$movieDetails //
+stores.$details //
   .on(fetchMovieFx.doneData, (_, m) => {
     if (!m) return null
-    return 'runtime' in m ? MovieDetails.fromServer(m) : SeriesDetails.fromServer(m)
+    return deserialize(m, isMovie(m) ? MovieDetails : SeriesDetails)
   })
   .reset(events.clearMovie)

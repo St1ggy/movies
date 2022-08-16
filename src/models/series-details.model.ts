@@ -1,14 +1,7 @@
 import { JsonName } from 'tserialize'
 
-import { Serializable } from './helpers'
+import { getDetails } from './details.model'
 
-export class SeriesDetails extends Serializable<ShowResponse, SeriesDetails>() {
-  @JsonName('original_name')
-  originalTitle: ShowResponse['original_name']
+const Details = getDetails({ originalTitleKey: 'original_name', localizedTitleKey: 'name' })
 
-  @JsonName()
-  name: ShowResponse['name']
-
-  @JsonName('original_language')
-  originalLanguage: ShowResponse['original_language']
-}
+export class SeriesDetails extends Details {}

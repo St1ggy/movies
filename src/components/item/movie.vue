@@ -12,12 +12,13 @@ const {
 </script>
 
 <template lang="pug">
-NuxtLink.movie(:to="`/movie/${movie.id}`")
-  img.image(:src="`${tmdbImagePath}${movie.posterUrl}`", v-if="movie.posterUrl")
+NuxtLink.movie(:to="`/${paramByType[movie.type]}/${movie.id}`")
+  img.image(:src="`${tmdbImagePath}${movie.posterPath}`", v-if="movie.posterPath")
 
   .content
-    h2.title {{ movie.localizedTitle ?? '-' }}
-    h3.subtitle {{ movie.originalTitle ?? '-' }}
+    h4.title {{ movie.localizedTitle ?? '-' }}
+    h5.subtitle(v-if="movie.originalTitle.length") {{ movie.originalTitle }}
+    h5.subtitle {{ movie.releaseDate }}
 </template>
 
 <style scoped lang="scss">
@@ -47,11 +48,11 @@ NuxtLink.movie(:to="`/movie/${movie.id}`")
     backdrop-filter: blur(32px);
 
     .title {
-      @apply font-black;
+      @apply font-black text-primary;
     }
 
     .subtitle {
-      @apply font-semibold;
+      @apply font-semibold text-secondary;
     }
   }
 

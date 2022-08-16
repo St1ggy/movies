@@ -17,8 +17,8 @@ import { supabase } from './supabase'
 //         const isMovie = 'runtime' in m
 //         const updatedFields = {
 //           description: m.overview,
-//           posterUrl: tmdbImagePath + m.poster_path,
-//           backdropUrl: tmdbImagePath + m.backdrop_path,
+//           posterPath: tmdbImagePath + m.poster_path,
+//           backdropPath: tmdbImagePath + m.backdrop_path,
 //           localizedTitle: isMovie ? m.title : m.name,
 //           originalTitle: isMovie ? m.original_title : m.original_name,
 //         }

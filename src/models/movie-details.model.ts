@@ -1,15 +1,7 @@
-import { MovieResponse } from 'moviedb-promise/dist/request-types'
 import { JsonName } from 'tserialize'
 
-import { Serializable } from './helpers'
+import { getDetails } from './details.model'
 
-export class MovieDetails extends Serializable<MovieResponse, MovieDetails>() {
-  @JsonName('original_title')
-  originalTitle: MovieResponse['original_title']
+const Details = getDetails({ originalTitleKey: 'original_title', localizedTitleKey: 'title' })
 
-  @JsonName()
-  title: MovieResponse['title']
-
-  @JsonName('original_language')
-  originalLanguage: MovieResponse['original_language']
-}
+export class MovieDetails extends Details {}

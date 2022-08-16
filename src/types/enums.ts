@@ -9,7 +9,7 @@ export enum MovieType {
   SERIES = 'SERIES',
 }
 
-export enum TmdbStatus {
+export enum ProductionStatus {
   RUMORED = 'Rumored',
   PLANNED = 'Planned',
   IN_PRODUCTION = 'In Production',

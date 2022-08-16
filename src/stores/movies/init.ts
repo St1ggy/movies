@@ -1,4 +1,5 @@
 import { sample } from 'effector'
+import { deserialize } from 'tserialize'
 
 import { Movie } from '@/models'
 
@@ -30,6 +31,8 @@ stores.$query //
   .reset(events.clearQuery)
 
 stores.$movies //
-  .on(fetchMoviesFx.doneData, (_, ms) => ms.map((m) => Movie.fromServer(m)))
-  .on(updateMovieFx.doneData, (prev, updated) => prev.map((g) => (g.id === updated.id ? Movie.fromServer(updated) : g)))
+  .on(fetchMoviesFx.doneData, (_, ms) => ms.map((m) => deserialize(m, Movie)))
+  .on(updateMovieFx.doneData, (prev, updated) =>
+    prev.map((g) => (g.id === updated.id ? deserialize(updated, Movie) : g)),
+  )
   .reset(events.clearMovies)

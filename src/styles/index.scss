@@ -1,10 +1,11 @@
+@use "sass:math";
+
 @import "https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Source+Sans+Pro:wght@200;300;400;600;700;900&display=swap";
 @import "themes";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 
 @layer base {
   html {
@@ -25,11 +26,12 @@
   @for $i from 1 through 6 {
     h#{$i} {
       @apply font-montserrat;
+      font-size: #{math.div(2, math.sqrt($i))}em;
     }
   }
 
   input[type='text'] {
-    @apply bg-secondary text-xl py-4 px-8 w-96 rounded-2xl text-center text-page;
+    @apply bg-primary text-xl py-4 px-8 w-96 rounded-2xl text-center text-page;
   }
 }
 

@@ -1,8 +1,6 @@
 import { JsonName } from 'tserialize'
 
-import { Serializable } from './helpers'
-
-export class Movie extends Serializable<TMovie, Movie>() {
+export class Movie {
   @JsonName()
   id: TMovie['id']
 
@@ -22,10 +20,10 @@ export class Movie extends Serializable<TMovie, Movie>() {
   description: TMovie['description']
 
   @JsonName()
-  backdropUrl: TMovie['backdropUrl']
+  backdropPath: TMovie['backdropPath']
 
   @JsonName()
-  posterUrl: TMovie['posterUrl']
+  posterPath: TMovie['posterPath']
 
   @JsonName()
   status: TMovie['status']

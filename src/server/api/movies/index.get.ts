@@ -12,8 +12,8 @@ import { supabase } from '../supabase'
 //         const isMovie = 'runtime' in m
 //         const body: TUpdatedMovie = {
 //           id: _m.id,
-//           posterUrl: m.poster_path,
-//           backdropUrl: m.backdrop_path,
+//           posterPath: m.poster_path,
+//           backdropPath: m.backdrop_path,
 //           // runtime: isMovie ? [m.runtime ?? 0] : m.episode_run_time.sort(),
 //           // tagline: m.tagline?.replace(/[«»]/g, '') ?? '',
 //         }
