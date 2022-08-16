@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { useStore } from 'effector-vue/composition'
 
-import { movieStore, moviesStore } from '@/stores'
+import { Movie } from '@/models'
+import { store } from '@/stores'
+
+import type { ReadonlyDeep } from 'type-fest'
 
 const id = useParamsId()
 
@@ -10,15 +13,14 @@ definePageMeta({
   title: 'Страница фильма',
 })
 
-const isLoading = useStore(movieStore.stores.$isLoading)
-const movieDetails = useStore(movieStore.stores.$movieDetails)
+const isLoading = useStore(store.movie.stores.$isLoading)
+const movieDetails = useStore(store.movie.stores.$movieDetails)
 
-const moviesMap = useStore(moviesStore.computed.$moviesMap)
+const moviesMap = useStore(store.movies.computed.$moviesMap)
 const movieCurrent = computed(() => moviesMap.value[id] ?? null)
-
-const fetchMovie = (m: TMovie | null) => {
+const fetchMovie = (m: ReadonlyDeep<Movie> | null) => {
   if (m) {
-    movieStore.events.getMovieById({ id, type: m.type })
+    store.movie.events.getMovieById({ id, type: m.type })
   }
 }
 
@@ -28,7 +30,7 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-  movieStore.events.clearMovie()
+  store.movie.events.clearMovie()
 })
 
 const getTitle = () => {
@@ -44,9 +46,14 @@ useHead({ titleTemplate: getTitle })
 </script>
 
 <template lang="pug">
-.wrapper.p-4
+.wrapper.p-4.flex.flex-col
+  .toolbar.h-16.w-full
+    NuxtLink(to="/")
+      Icon.w-8.h-8(name="ChevronLeftIcon")
+
   p(v-if="isLoading") Loading...
-  .flex.flex-col(v-else)
+
+  .flex.flex-col.flex-start(v-else)
     h1.self-center.my-8 {{ moviesMap[id]?.localizedTitle ?? '' }} - {{ moviesMap[id]?.originalTitle ?? '' }}
     .flex.flex-row
       ItemJson(:data="movieCurrent", title="Нужно", v-if="!!movieCurrent")
@@ -55,6 +62,6 @@ useHead({ titleTemplate: getTitle })
 
 <style scoped lang="scss">
 .wrapper {
-  @apply flex flex-grow flex-col items-center justify-center;
+  @apply flex flex-grow flex-col items-center;
 }
 </style>

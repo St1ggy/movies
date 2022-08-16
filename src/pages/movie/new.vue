@@ -2,7 +2,6 @@
 definePageMeta({
   middleware: ['auth'],
   title: 'Добавить',
-  menuPosition: 1,
 })
 </script>
 

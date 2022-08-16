@@ -1,5 +1,7 @@
 import { sample } from 'effector'
 
+import { Movie } from '@/models'
+
 import { fetchMoviesFx, updateMovieFx } from './effects'
 import * as events from './events'
 import * as stores from './stores'
@@ -28,6 +30,6 @@ stores.$query //
   .reset(events.clearQuery)
 
 stores.$movies //
-  .on(fetchMoviesFx.doneData, (_, g) => g)
-  .on(updateMovieFx.doneData, (prev, updated) => prev.map((g) => (g.id === updated.id ? updated : g)))
+  .on(fetchMoviesFx.doneData, (_, ms) => ms.map((m) => Movie.fromServer(m)))
+  .on(updateMovieFx.doneData, (prev, updated) => prev.map((g) => (g.id === updated.id ? Movie.fromServer(updated) : g)))
   .reset(events.clearMovies)

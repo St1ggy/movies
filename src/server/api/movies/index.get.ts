@@ -33,7 +33,6 @@ import { supabase } from '../supabase'
 //       ),
 //     ),
 //   )
-
 export default defineEventHandler(async () => {
   try {
     const { data: movies } = await supabase

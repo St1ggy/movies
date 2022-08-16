@@ -1,16 +1,15 @@
 <script setup lang="ts">
 import { useStore } from 'effector-vue/composition'
 
-import { genresStore } from '@/stores'
+import { store } from '@/stores'
 
 definePageMeta({
   title: 'DEBUG',
-  menuPosition: process.dev ? 2 : undefined,
 })
 
 const { data, pending, error } = useFetch('/api/debug')
 
-const genres = useStore(genresStore.stores.$genres)
+const genres = useStore(store.genres.stores.$genres)
 </script>
 
 <template lang="pug">

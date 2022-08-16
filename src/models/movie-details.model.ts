@@ -1,14 +1,15 @@
-import { JsonName, deserialize, serialize } from 'tserialize'
+import { MovieResponse } from 'moviedb-promise/dist/request-types'
+import { JsonName } from 'tserialize'
 
-export class MovieDetails {
+import { Serializable } from './helpers'
+
+export class MovieDetails extends Serializable<MovieResponse, MovieDetails>() {
   @JsonName('original_title')
-  originalTitle = ''
+  originalTitle: MovieResponse['original_title']
 
-  static fromServer(data: MovieResponse): MovieDetails {
-    return deserialize<MovieDetails>(data, MovieDetails)
-  }
+  @JsonName()
+  title: MovieResponse['title']
 
-  static toServer(data: MovieDetails) {
-    return serialize(data) as MovieResponse
-  }
+  @JsonName('original_language')
+  originalLanguage: MovieResponse['original_language']
 }

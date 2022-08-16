@@ -1,9 +1,13 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import { TmdbClient } from 'tmdb-js-wrapper/src/tmdb-js/tmdb-js'
+import { MovieDb } from 'moviedb-promise'
 
 const {
-  public: { tmdbApiKey },
+  public: { tmdbApiKey, tmdbLanguage = 'ru' },
 } = useRuntimeConfig()
 
-export const tmdbApi = new TmdbClient(tmdbApiKey, 'ru-RU')
+class TmdbApi extends MovieDb {
+  constructor(apiKey: string, public locale: string) {
+    super(apiKey)
+  }
+}
+
+export const tmdbApi = new TmdbApi(tmdbApiKey, tmdbLanguage)

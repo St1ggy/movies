@@ -19,6 +19,7 @@ export default defineNuxtConfig({
       supabaseDbKey: '',
       tmdbApiKey: '',
       tmdbImagePath: '',
+      tmdbLanguage: '',
     },
   },
   srcDir: 'src',

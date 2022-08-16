@@ -1,14 +1,14 @@
-import { JsonName, deserialize, serialize } from 'tserialize'
+import { JsonName } from 'tserialize'
 
-export class SeriesDetails {
+import { Serializable } from './helpers'
+
+export class SeriesDetails extends Serializable<ShowResponse, SeriesDetails>() {
   @JsonName('original_name')
-  originalTitle = ''
+  originalTitle: ShowResponse['original_name']
 
-  static fromServer(data: SeriesResponse): SeriesDetails {
-    return deserialize<SeriesDetails>(data, SeriesDetails)
-  }
+  @JsonName()
+  name: ShowResponse['name']
 
-  static toServer(data: SeriesDetails) {
-    return serialize(data) as SeriesResponse
-  }
+  @JsonName('original_language')
+  originalLanguage: ShowResponse['original_language']
 }

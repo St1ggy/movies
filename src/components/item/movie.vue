@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import { Movie } from '@/models'
+
 defineProps<{
-  movie: Readonly<TMovie>
+  movie: Readonly<Movie>
   updateMovie(updatedMovie: TUpdatedMovie): void
 }>()
 

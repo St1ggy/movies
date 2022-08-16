@@ -1,18 +1,17 @@
 <script setup lang="ts">
 import { useStore, useVModel } from 'effector-vue/composition'
 
-import { moviesStore } from '@/stores'
+import { store } from '@/stores'
 
 definePageMeta({
   middleware: ['auth'],
   title: 'Все',
-  menuPosition: 0,
 })
 
-const isLoading = useStore(moviesStore.stores.$isLoading)
-const data = useStore(moviesStore.computed.$moviesFiltered)
+const isLoading = useStore(store.movies.stores.$isLoading)
+const data = useStore(store.movies.computed.$moviesFiltered)
 
-const query = useVModel(moviesStore.stores.$query)
+const query = useVModel(store.movies.stores.$query)
 </script>
 
 <template lang="pug">
@@ -24,10 +23,16 @@ const query = useVModel(moviesStore.stores.$query)
     .filters
       .search-bar
         input(type="text", v-model="query")
-        Icon.icon(name="SearchIcon")
+        Icon.icon.left(name="SearchIcon")
+        Icon.icon.right.cursor-pointer(@click="query = ''", name="XCircleIcon", v-if="query.length")
 
     .grid-list
-      ItemMovie(:key="movie.id", :movie="movie", :update-movie="moviesStore.events.updateMovie", v-for="movie in data")
+      ItemMovie(
+        :key="movie.id",
+        :movie="movie",
+        :update-movie="store.movies.events.updateMovie",
+        v-for="movie in data"
+      )
 </template>
 
 <style scoped lang="scss">
@@ -42,26 +47,22 @@ const query = useVModel(moviesStore.stores.$query)
     @apply mt-4 relative self-center flex-row flex justify-center items-center;
 
     .search-bar {
-      @apply w-96 relative;
+      @apply w-96 relative text-page;
+
+      input {
+        @apply px-14;
+      }
 
       .icon {
-        @apply w-8 h-8 ml-4 absolute left-0 top-1/2 -translate-y-1/2;
-      }
-    }
+        @apply w-8 h-8 mx-4 absolute top-1/2 -translate-y-1/2;
 
-    .done-filter {
-      @apply ml-4 cursor-pointer transition-opacity w-12 h-12;
+        &.left {
+          @apply left-0;
+        }
 
-      &:hover {
-        @apply opacity-75 #{!important};
-      }
-
-      &.on {
-        @apply text-success;
-      }
-
-      &.off {
-        @apply opacity-40;
+        &.right {
+          @apply right-0;
+        }
       }
     }
   }

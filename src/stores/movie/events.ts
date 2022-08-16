@@ -1,4 +1,6 @@
 import { createEvent } from 'effector'
 
-export const getMovieById = createEvent<Pick<TMovie, 'id' | 'type'>>()
+import { Movie } from '@/models'
+
+export const getMovieById = createEvent<Pick<Movie, 'id' | 'type'>>()
 export const clearMovie = createEvent()

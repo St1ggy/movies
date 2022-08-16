@@ -1,5 +1,7 @@
 import { combine } from 'effector'
 
+import { Movie } from '@/models'
+
 import { $movies, $query } from './stores'
 
 export const $moviesFiltered = combine($movies, $query, (movies, query) =>
@@ -8,9 +10,8 @@ export const $moviesFiltered = combine($movies, $query, (movies, query) =>
     return [matchQuery].every((_) => _)
   }),
 )
-
 export const $moviesMap = $movies.map((movies) =>
-  movies.reduce<Record<TMovie['id'], TMovie>>((acc, movie) => {
+  movies.reduce<Record<Movie['id'], Movie>>((acc, movie) => {
     acc[movie.id] = movie
     return acc
   }, {}),

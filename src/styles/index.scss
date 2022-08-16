@@ -7,7 +7,6 @@
 
 
 @layer base {
-
   html {
     @apply font-ssp;
 
@@ -30,7 +29,7 @@
   }
 
   input[type='text'] {
-    @apply bg-page-content text-xl py-4 px-8 w-96 rounded-2xl text-center;
+    @apply bg-secondary text-xl py-4 px-8 w-96 rounded-2xl text-center text-page;
   }
 }
 

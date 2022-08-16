@@ -1,13 +1,25 @@
 html {
   --col-white: 255 255 255; // rgb(255, 255, 255);
-  --col-black: 39 39 39; // rgb(39, 39, 39);
+  --col-black: 31 31 31; // rgb(31, 31, 31);
 
   --col-primary: 255 255 255; // rgb(255, 255, 255);
   --col-secondary: 230 236 245; // rgb(230, 236, 245);
   --col-page: 22 25 33; // rgb(22, 25, 33);
-  --col-page-content: 116 140 171; // rgb(116, 140, 171);
   --col-success: 57 158 90; // rgb(57, 158, 90);
   --col-info: 58 133 199; // rgb(58, 133, 199);
   --col-warning: 255 127 17; // rgb(255, 127, 17);
   --col-danger: 255 27 28; // rgb(255, 27, 28);
+}
+
+.test {
+  --col-white: rgb(255, 255, 255);
+  --col-black: rgb(31, 31, 31);
+
+  --col-primary: rgb(255, 255, 255);
+  --col-secondary: rgb(230, 236, 245);
+  --col-page: rgb(22, 25, 33);
+  --col-success: rgb(57, 158, 90);
+  --col-info: rgb(58, 133, 199);
+  --col-warning: rgb(255, 127, 17);
+  --col-danger: rgb(255, 27, 28);
 }

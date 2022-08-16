@@ -1,5 +1,6 @@
+import { Movie } from '@/models'
+
 import { supabase } from './supabase'
-import { tmdbApi } from './tmdb'
 
 // const {
 //   public: { tmdbImagePath },
@@ -29,7 +30,7 @@ import { tmdbApi } from './tmdb'
 export default defineEventHandler(async () => {
   try {
     const { data: movies } = await supabase
-      .from<TMovie>('movies')
+      .from<Movie>('movies')
       .select('*')
       .order('originalTitle', { ascending: true })
 

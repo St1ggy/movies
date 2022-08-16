@@ -1,1 +1,3 @@
-export const useParamsId = () => useRoute().params.id as unknown as TMovie['id']
+import { Movie } from '@/models'
+
+export const useParamsId = () => useRoute().params.id as unknown as Movie['id']
