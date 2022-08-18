@@ -4,6 +4,8 @@ const {
   themeConfig: { colors },
 } = require('./tailwind.configs')
 
+const sizes = ['minWidth', 'maxWidth', 'minHeight', 'maxHeight']
+
 module.exports = {
   darkMode: 'class',
   theme: {
@@ -15,12 +17,10 @@ module.exports = {
       gridTemplateColumns: {
         auto: 'repeat(auto-fill, minmax(0, 1fr))',
       },
-      minHeight: ({ theme }) => ({
-        ...theme('spacing'),
-      }),
-      minWidth: ({ theme }) => ({
-        ...theme('spacing'),
-      }),
+      ...sizes.reduce((acc, key) => {
+        acc[key] = ({ theme }) => ({ ...theme('spacing') })
+        return acc
+      }, {}),
     },
     colors,
   },

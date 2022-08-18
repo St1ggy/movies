@@ -12,19 +12,12 @@ sample({
   target: fetchMovieFx,
 })
 
-sample({
-  source: fetchMovieFx.doneData,
-  fn: () => false,
-  target: stores.$isLoading,
-})
-
 stores.$isLoading //
-  .on(fetchMovieFx.pending, () => true)
-  .reset(fetchMovieFx.doneData)
+  .on(fetchMovieFx.pending, (_, pending) => pending)
 
 stores.$details //
   .on(fetchMovieFx.doneData, (_, m) => {
     if (!m) return null
-    return deserialize(m, isMovie(m) ? MovieDetails : SeriesDetails)
+    return isMovie(m) ? deserialize(m, MovieDetails) : deserialize(m, SeriesDetails)
   })
-  .reset(events.clearMovie)
+  .reset([events.clearMovie])

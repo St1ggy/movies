@@ -4,3 +4,5 @@ export * from './use-params-type'
 
 export * from './typeguards'
 export * from './utils'
+
+export * from './dayjs-config'

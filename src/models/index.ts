@@ -1,3 +1,3 @@
-export * from './movie-details.model'
-export * from './movie.model'
-export * from './series-details.model'
+export * from './movie-details'
+export * from './movie'
+export * from './series-details'

@@ -1,19 +1,12 @@
 <script setup lang="ts">
 import { Movie } from '@/models'
 
-defineProps<{
-  movie: Readonly<Movie>
-  updateMovie(updatedMovie: TUpdatedMovie): void
-}>()
-
-const {
-  public: { tmdbImagePath },
-} = useRuntimeConfig()
+defineProps<{ movie: Readonly<Movie> }>()
 </script>
 
 <template lang="pug">
-NuxtLink.movie(:to="`/${paramByType[movie.type]}/${movie.id}`")
-  img.image(:src="`${tmdbImagePath}${movie.posterPath}`", v-if="movie.posterPath")
+nuxt-link.movie(:to="`/${paramByType[movie.type]}/${movie.id}`")
+  img.image(:src="getImagePath(movie.posterPath)", v-if="movie.posterPath")
 
   .content
     h4.title {{ movie.localizedTitle ?? '-' }}
@@ -23,7 +16,7 @@ NuxtLink.movie(:to="`/${paramByType[movie.type]}/${movie.id}`")
 
 <style scoped lang="scss">
 .movie {
-  @apply flex flex-col w-64 justify-end rounded-3xl overflow-hidden relative aspect-[2/3];
+  @apply flex flex-col justify-end rounded-3xl overflow-hidden relative aspect-[2/3];
 
   img {
     @apply absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2;

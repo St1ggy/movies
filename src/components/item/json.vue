@@ -5,5 +5,5 @@ defineProps<{ title: string; data: object }>()
 <template lang="pug">
 .flex-col.flex-1
   h2 {{ title }}
-  VueJsonPretty(:data="data", :deep="10", :showDoubleQuotes="false", showLength)
+  json-pretty(:data="data", :deep="10", :showDoubleQuotes="false", showLength)
 </template>

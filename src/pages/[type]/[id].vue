@@ -18,9 +18,6 @@ const fetchMovie = () => store.movie.events.getDetails({ id, type })
 
 onMounted(fetchMovie)
 onUnmounted(store.movie.events.clearMovie)
-const background = computed(() =>
-  details.value ? `url(${getImagePath(details.value.backdropPath)}) no-repeat center center / cover` : '',
-)
 
 useHead({
   titleTemplate: () => details.value?.titles.title ?? 'Загрузка...',
@@ -28,53 +25,42 @@ useHead({
 </script>
 
 <template lang="pug">
-.wrapper
-  .backdrop(:style="{ background }", v-if="details != null")
-  .toolbar
-    .flex-1
-      NuxtLink(to="/")
-        Icon.w-12.h-12(name="ChevronLeftIcon")
+page-wrapper(:loading="isLoading")
+  template(#toolbar-left)
+    nuxt-link(to="/")
+      icon-button(name="ChevronLeftIcon")
 
+  template(#toolbar-center)
     .flex-col
-      h3.title {{ details?.titles.title }} {{ backdropPath }}
-      h5.subtitle {{ details?.titles.subtitle }}
+      h3.toolbar-title {{ details?.titles.title }}
+      h5.toolbar-subtitle {{ details?.titles.subtitle }}
 
-    .flex-1
-
-  Loader.loader(v-if="isLoading")
-
-  .content(v-else-if="details")
-    .flex.flex-row
-      ItemJson(:data="details", title="Детали", v-if="!!details")
+  .content(:style="{ 'background-image': `url(${getImagePath(details.backdropPath)})` }", v-if="details")
+    details-series(:details="details", v-if="isSeries(details)")
+    details-movie(:details="details", v-if="isMovie(details)")
 </template>
 
 <style scoped lang="scss">
-.wrapper {
-  @apply flex flex-col flex-grow items-center relative h-screen;
+.content {
+  @apply bg-fixed bg-no-repeat bg-top bg-cover;
 
-  .backdrop {
-    // TODO
-    @apply h-full w-full absolute backdrop-filter blur brightness-50;
+  &:before {
+    content: '';
+    @apply bg-opacity-80 bg-page absolute w-full h-full backdrop-blur;
+  }
+}
+
+.toolbar {
+  &-title {
+    @apply text-center text-primary;
   }
 
-  .loader {
-    @apply flex-1 self-center;
+  &-subtitle {
+    @apply text-center text-secondary;
   }
+}
 
-  .toolbar {
-    @apply h-20 w-full flex items-center;
-
-    .title {
-      @apply text-center text-primary;
-    }
-
-    .subtitle {
-      @apply text-center text-secondary;
-    }
-  }
-
-  .content {
-    @apply flex flex-col overflow-scroll;
-  }
+.content {
+  @apply flex flex-col overflow-scroll;
 }
 </style>

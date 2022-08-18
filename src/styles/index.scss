@@ -9,14 +9,14 @@
 
 @layer base {
   html {
-    @apply font-ssp;
+    @apply font-ssp bg-page;
 
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   #app {
-    @apply min-h-screen flex bg-page text-primary;
+    @apply min-h-screen flex text-primary;
   }
 
   * {
@@ -31,7 +31,7 @@
   }
 
   input[type='text'] {
-    @apply bg-primary text-xl py-4 px-8 w-96 rounded-2xl text-center text-page;
+    @apply bg-primary text-xl py-4 px-8 w-full rounded-2xl text-center text-page;
   }
 }
 

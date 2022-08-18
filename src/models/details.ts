@@ -2,49 +2,10 @@ import { JsonArray, JsonName } from 'tserialize'
 
 import { ProductionStatus } from '@/types'
 
-class Genre {
-  @JsonName()
-  id: number
-
-  @JsonName('name', (s) => s, (s) => s.toLowerCase())
-  name: string
-}
-
-/** Locale: en, ru, fr */
-type Iso639 = string
-
-/** Country: US, RU, FR */
-type Iso3166 = string
-
-class ProductionCompany {
-  @JsonName()
-  id: number
-
-  @JsonName('logo_path')
-  logoPath: string | null
-
-  @JsonName()
-  name: string
-
-  @JsonName('origin_country')
-  originCountry: Iso3166
-}
-
-class ProductionCountry {
-  @JsonName('iso_3166_1')
-  iso3166: Iso3166
-
-  @JsonName()
-  name: string
-}
-
-class SpokenLanguage {
-  @JsonName('iso_639_1')
-  iso639: Iso639
-
-  @JsonName()
-  name: string
-}
+import { Genre } from './genre'
+import { ProductionCompany } from './production-company'
+import { ProductionCountry } from './production-country'
+import { SpokenLanguage } from './spoken-language'
 
 export const getDetails = ({ originalTitleKey, localizedTitleKey }) => {
   abstract class Details {
@@ -96,7 +57,7 @@ export const getDetails = ({ originalTitleKey, localizedTitleKey }) => {
     @JsonName()
     overview: string | number
 
-    @JsonName()
+    @JsonName('tagline', (s) => s, (s) => s.replace(/[«»]/g, ''))
     tagline: string | number
 
     @JsonName()
@@ -111,7 +72,8 @@ export const getDetails = ({ originalTitleKey, localizedTitleKey }) => {
         }
 
       return {
-        title: originalTitle || localizedTitle || '',
+        title: originalTitle || localizedTitle || '-',
+        subtitle: '',
       }
     }
   }

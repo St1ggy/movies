@@ -34,4 +34,10 @@ declare global {
   type ShowResponse = MDBRequestTypes.ShowResponse
 
   type GenresRecord = Record<Genre['id'], Genre['name']>
+
+  /** Locale: en, ru, fr */
+  type Iso639 = string
+
+  /** Country: US, RU, FR */
+  type Iso3166 = string
 }

@@ -17,22 +17,15 @@ sample({
   target: updateMovieFx,
 })
 
-sample({
-  source: fetchMoviesFx.doneData,
-  fn: () => false,
-  target: stores.$isLoading,
-})
-
 stores.$isLoading //
-  .on(fetchMoviesFx.pending, () => true)
-  .reset(fetchMoviesFx.doneData)
+  .on(fetchMoviesFx.pending, (_, pending) => pending)
 
 stores.$query //
-  .reset(events.clearQuery)
+  .reset([events.clearQuery])
 
 stores.$movies //
   .on(fetchMoviesFx.doneData, (_, ms) => ms.map((m) => deserialize(m, Movie)))
   .on(updateMovieFx.doneData, (prev, updated) =>
     prev.map((g) => (g.id === updated.id ? deserialize(updated, Movie) : g)),
   )
-  .reset(events.clearMovies)
+  .reset([events.clearMovies])
